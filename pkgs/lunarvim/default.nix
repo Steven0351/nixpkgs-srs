@@ -35,9 +35,6 @@ in stdenv.mkDerivation rec {
 
   chmod +x $out/bin/lvim
 
-  "$out/bin/lvim" --headless \
-    -c 'autocmd User PackerComplete quitall' \
-    -c 'PackerSync'
   '';
 
   meta = with lib; {
