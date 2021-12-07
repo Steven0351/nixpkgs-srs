@@ -1,15 +1,17 @@
-{ lib, pkgs, fetchFromGitHub }:
+{ lib, stdenv, pkgs, fetchFromGitHub }:
 let 
   version = "unstable";
   lunarvimRuntimeDir = "$out/share/lunarvim";
   lunarvimConfigDir = builtins.getEnv "HOME" + "/.config/lvim";
-in fetchFromGitHub rec {
+in stdenv.mkDerivation rec {
   name = "lunarvim-${version}";
 
-  owner = "LunarVim";
-  repo = "LunarVim";
-  rev = "6770808bec1ffcada425ae514747f9380e3d3b8d";
-  sha256 = "fHmvxAz9DqAh7pQ4l1OCQkAGSHDg2kNhDSgtngFEFI8=";
+  src = fetchFromGitHub {
+    owner = "LunarVim";
+    repo = "LunarVim";
+    rev = "6770808bec1ffcada425ae514747f9380e3d3b8d";
+    sha256 = "fHmvxAz9DqAh7pQ4l1OCQkAGSHDg2kNhDSgtngFEFI8=";
+  };
 
   buildInputs = with pkgs; [
     tree-sitter
