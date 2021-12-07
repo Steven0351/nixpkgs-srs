@@ -9,7 +9,7 @@ let
     #!/bin/sh
     export LUNARVIM_CONFIG_DIR=${homeDir}/.config/lvim
     export LUNARVIM_RUNTIME_DIR=${homeDir}/.nix-profile/share/lunarvim
-    exec nvim -u ${homeDir}/share/lunarvim/init.lua "$@"
+    exec nvim -u ${homeDir}/.nix-profile/share/lunarvim/init.lua "$@"
   '';
 in stdenv.mkDerivation rec {
   name = "lunarvim-${version}";
@@ -29,10 +29,13 @@ in stdenv.mkDerivation rec {
     ripgrep
     fd
     git
+  ];
+  
+  propagatedBuildInputs = [
     lvimBin
   ];
 
-  postInstall = ''
+  buildPhase = ''
     mkdir -p ${lunarvimRuntimeDir}/lvim 
     cp -r . ${lunarvimRuntimeDir}/lvim
   '';
