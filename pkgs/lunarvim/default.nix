@@ -20,6 +20,7 @@ in stdenv.mkDerivation rec {
     python39Packages.pynvim
     ripgrep
     fd
+    git
   ];
 
   postInstall = ''
