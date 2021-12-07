@@ -31,7 +31,6 @@ let
       pkgs.python39Packages.pynvim
       pkgs.ripgrep
       pkgs.fd
-      lvimBin
     ];
 
     buildPhase = ''
@@ -39,7 +38,6 @@ let
     '';
 
     installPhase = ''
-      cp ${lvimBin}/bin/lvim $out/bin
       mkdir -p ${lunarvimRuntimeDir}/lvim 
       cp -r . ${lunarvimRuntimeDir}/lvim
     '';
@@ -55,4 +53,7 @@ let
 in pkgs.symlinkJoin {
   name = "lvim";
   paths = [ lvimBin pkgs.neovim ];
+  propagatedBuildInputs = [
+    lunarvim
+  ];
 }
