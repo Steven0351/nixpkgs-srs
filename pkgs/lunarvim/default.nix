@@ -47,7 +47,7 @@ in stdenv.mkDerivation rec {
   meta = with lib; {
     description = "An IDE Layer for Neovim 0.5.0+";
     homepage = "https://lunarvim.org";
-    license = licenses.gplv3;
+    license = licenses.gpl3Only;
     platforms = platforms.all;
     maintainers = with maintainers; [ ChristianChiarulli ];
   };
