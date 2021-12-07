@@ -8,8 +8,8 @@ let
   lvimBin = writeScriptBin "lvim" ''
     #!/bin/sh
     export LUNARVIM_CONFIG_DIR=${homeDir}/.config/lvim
-    export LUNARVIM_RUNTIME_DIR=${homeDir}/.nix-profile/share/lunarvim
-    exec ${pkgs.neovim}/bin/nvim -u ${homeDir}/.nix-profile/share/lunarvim/lvim/init.lua "$@"
+    export LUNARVIM_RUNTIME_DIR=${homeDir}/.local/share/lunarvim
+    exec ${pkgs.neovim}/bin/nvim -u ${homeDir}/.local/share/lunarvim/lvim/init.lua "$@"
   '';
   lunarvim = stdenv.mkDerivation rec {
     name = "lunarvim-${version}";
@@ -51,7 +51,7 @@ let
     };
   };
 in pkgs.symlinkJoin {
-  name = "lvim";
+  name = "nlvim";
   paths = [ lvimBin pkgs.neovim lunarvim ];
   propagatedBuildInputs = [
     lunarvim
