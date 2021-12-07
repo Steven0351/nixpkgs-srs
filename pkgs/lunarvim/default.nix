@@ -52,7 +52,7 @@ let
   };
 in pkgs.symlinkJoin {
   name = "lvim";
-  paths = [ lvimBin pkgs.neovim ];
+  paths = [ lvimBin pkgs.neovim lunarvim ];
   propagatedBuildInputs = [
     lunarvim
   ];
