@@ -22,16 +22,16 @@ in stdenv.mkDerivation rec {
   };
 
   buildInputs = with pkgs; [
-    tree-sitter
-    nodePackages.neovim
-    neovim
-    python39Packages.pynvim
-    ripgrep
-    fd
     git
   ];
   
   propagatedBuildInputs = [
+    pkgs.tree-sitter
+    pkgs.nodePackages.neovim
+    pkgs.neovim
+    pkgs.python39Packages.pynvim
+    pkgs.ripgrep
+    pkgs.fd
     lvimBin
   ];
 
