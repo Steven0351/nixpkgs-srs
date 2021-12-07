@@ -2,7 +2,6 @@
 let 
   version = "unstable";
   lunarvimRuntimeDir = "$out/share/lunarvim";
-  lunarvimConfigDir = builtins.getEnv "HOME" + "/.config/lvim";
 in stdenv.mkDerivation rec {
   name = "lunarvim-${version}";
 
@@ -29,16 +28,12 @@ in stdenv.mkDerivation rec {
 
   cat > '$out/bin/lvim' << EOF
   #!/bin/sh
-  export LUNARVIM_CONFIG_DIR=${lunarvimConfigDir}
+  export LUNARVIM_CONFIG_DIR=$HOME/.config/lvim
   export LUNARVIM_RUNTIME_DIR=${lunarvimRuntimeDir}
   exec nvim -u ${lunarvimRuntimeDir}/init.lua $@
   EOF
 
   chmod +x $out/bin/lvim
-
-  # if [ ! -f ${lunarvimConfigDir}/config.lua ]; then
-  #   cp "${lunarvimRuntimeDir}/lvim/utils/installer/config.example.lua" "${lunarvimConfigDir}/config.lua"
-  # fi
 
   "$out/bin/lvim" --headless \
     -c 'autocmd User PackerComplete quitall' \
