@@ -41,7 +41,7 @@ in stdenv.mkDerivation rec {
   installPhase = ''
     mkdir -p ${lunarvimRuntimeDir}/lvim 
     cp -r . ${lunarvimRuntimeDir}/lvim
-    cp ${lvimBin} $out/bin
+    cp ${lvimBin}/bin/lvim $out/bin
   '';
 
   meta = with lib; {
