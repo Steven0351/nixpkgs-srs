@@ -1,7 +1,16 @@
-{ lib, stdenv, pkgs, fetchFromGitHub }:
+{ 
+  lib, stdenv, pkgs, writeScriptBin, fetchFromGitHub,
+  homeDir ? throw "Must provide a home directory"
+}:
 let 
   version = "unstable";
   lunarvimRuntimeDir = "$out/share/lunarvim";
+  lvimBin = writeScriptBin "lvim" ''
+    #!/bin/sh
+    export LUNARVIM_CONFIG_DIR=${homeDir}/.config/lvim
+    export LUNARVIM_RUNTIME_DIR=${homeDir}/.nix-profile/share/lunarvim
+    exec nvim -u ${homeDir}/share/lunarvim/init.lua "$@"
+  '';
 in stdenv.mkDerivation rec {
   name = "lunarvim-${version}";
 
@@ -20,21 +29,12 @@ in stdenv.mkDerivation rec {
     ripgrep
     fd
     git
+    lvimBin
   ];
 
   postInstall = ''
-  mkdir -p ${lunarvimRuntimeDir}/lvim 
-  cp -r . ${lunarvimRuntimeDir}/lvim
-
-  cat > '$out/bin/lvim' << EOF
-  #!/bin/sh
-  export LUNARVIM_CONFIG_DIR=$HOME/.config/lvim
-  export LUNARVIM_RUNTIME_DIR=${lunarvimRuntimeDir}
-  exec nvim -u ${lunarvimRuntimeDir}/init.lua $@
-  EOF
-
-  chmod +x $out/bin/lvim
-
+    mkdir -p ${lunarvimRuntimeDir}/lvim 
+    cp -r . ${lunarvimRuntimeDir}/lvim
   '';
 
   meta = with lib; {
