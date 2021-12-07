@@ -49,4 +49,4 @@ in fetchFromGithub rec {
     platforms = platforms.all;
     maintainers = with maintainers; [ ChristianChiarulli ];
   };
-};
+}
