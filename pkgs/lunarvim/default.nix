@@ -1,6 +1,6 @@
-{ lib, pkgs, fetchFromGithub }:
+{ lib, pkgs, fetchFromGitHub }:
 let version = "unstable";
-in fetchFromGithub rec {
+in fetchFromGitHub rec {
   name = "lunarvim-${version}";
 
   owner = "LunarVim";
