@@ -9,7 +9,7 @@ let
     #!/bin/sh
     export LUNARVIM_CONFIG_DIR=${homeDir}/.config/lvim
     export LUNARVIM_RUNTIME_DIR=${homeDir}/.nix-profile/share/lunarvim
-    exec ${pkgs.nvim} -u ${homeDir}/.nix-profile/share/lunarvim/init.lua "$@"
+    exec ${pkgs.neovim}/bin/nvim -u ${homeDir}/.nix-profile/share/lunarvim/init.lua "$@"
   '';
   lunarvim = stdenv.mkDerivation rec {
     name = "lunarvim-${version}";
