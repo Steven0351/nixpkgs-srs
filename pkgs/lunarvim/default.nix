@@ -28,7 +28,6 @@ in stdenv.mkDerivation rec {
   propagatedBuildInputs = [
     pkgs.tree-sitter
     pkgs.nodePackages.neovim
-    pkgs.neovim
     pkgs.python39Packages.pynvim
     pkgs.ripgrep
     pkgs.fd
