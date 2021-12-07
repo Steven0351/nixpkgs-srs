@@ -36,9 +36,9 @@ in stdenv.mkDerivation rec {
 
   chmod +x $out/bin/lvim
 
-  if [ ! -f ${lunarvimConfigDir}/config.lua ]; then
-    cp "${lunarvimRuntimeDir}/lvim/utils/installer/config.example.lua" "${lunarvimConfigDir}/config.lua"
-  fi
+  # if [ ! -f ${lunarvimConfigDir}/config.lua ]; then
+  #   cp "${lunarvimRuntimeDir}/lvim/utils/installer/config.example.lua" "${lunarvimConfigDir}/config.lua"
+  # fi
 
   "$out/bin/lvim" --headless \
     -c 'autocmd User PackerComplete quitall' \
