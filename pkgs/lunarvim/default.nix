@@ -9,7 +9,7 @@ let
     #!/bin/sh
     export LUNARVIM_CONFIG_DIR=${homeDir}/.config/lvim
     export LUNARVIM_RUNTIME_DIR=${homeDir}/.nix-profile/share/lunarvim
-    exec nvim -u ${homeDir}/.nix-profile/share/lunarvim/init.lua "$@"
+    exec ${pkgs.nvim} -u ${homeDir}/.nix-profile/share/lunarvim/init.lua "$@"
   '';
   lunarvim = stdenv.mkDerivation rec {
     name = "lunarvim-${version}";
@@ -54,11 +54,5 @@ let
   };
 in pkgs.symlinkJoin {
   name = "lvim";
-  paths = [ pkgs.neovim ];
-  buildInputs = [ pkgs.makeWrapper ];
-  postBuild = ''
-    export LUNARVIM_CONFIG_DIR=${homeDir}/.config/lvim
-    export LUNARVIM_RUNTIME_DIR=${homeDir}/.nix-profile/share/lunarvim
-    wrapProgram $out/bin/nvim -u ${homeDir}/.nix-profile/share/lunarvim/init.lua
- '';
+  paths = [ lvimBin pkgs.neovim ];
 }
