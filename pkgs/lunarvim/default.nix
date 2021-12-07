@@ -15,7 +15,7 @@ in stdenv.mkDerivation rec {
 
   buildInputs = with pkgs; [
     tree-sitter
-    nodePackages_latest.neovim
+    nodePackages.neovim
     neovim
     python39Packages.pynvim
     ripgrep
