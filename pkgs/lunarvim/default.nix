@@ -34,7 +34,7 @@ in stdenv.mkDerivation rec {
     lvimBin
   ];
 
-  buildPhase = ''
+  installPhase = ''
     mkdir -p ${lunarvimRuntimeDir}/lvim 
     cp -r . ${lunarvimRuntimeDir}/lvim
   '';
