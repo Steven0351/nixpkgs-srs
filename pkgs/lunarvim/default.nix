@@ -35,6 +35,7 @@ in stdenv.mkDerivation rec {
   ];
 
   buildPhase = ''
+  mkdir $out/bin
   cp ${lvimBin}/bin/lvim $out/bin
   '';
 
